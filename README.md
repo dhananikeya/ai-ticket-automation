@@ -59,7 +59,7 @@ Analyzes ticket volumes on a schedule and flags unusual activity based on define
 
 <div align="center">
 
-<img src="assets/workflow-overview.jpg" alt="Full n8n AI ticket automation workflow" width="100%">
+<img src="assets/workflow-full.png" alt="Full n8n AI ticket automation workflow" width="100%">
 
 <sub>Full n8n workflow showing ticket ingestion, data cleaning, LLM classification, priority logic, department routing, chatbot analysis, scheduled monitoring, and final storage.</sub>
 
