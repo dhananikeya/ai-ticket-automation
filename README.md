@@ -151,6 +151,14 @@ Tickets are automatically routed according to their classified issue type:
 | Hardware Support | Desktop Support Team |
 | Security Issue | Security Team |
 
+<div align="center">
+
+<img src="assets/workflow-routing.png" alt="Department routing and team assignment workflow" width="100%">
+
+<sub>Close-up of the routing stage, showing priority handling, hardware detection, department routing, team assignment, merge, and final storage.</sub>
+
+</div>
+
 ### Centralized Ticket Storage
 
 Processed tickets are merged into a consistent output structure and written to a Google Sheets master ticket database with fields such as:
@@ -185,6 +193,14 @@ This test demonstrates the full classification-to-routing path, including the de
 
 ### AI Ticket Data Assistant
 
+<div align="center">
+
+<img src="assets/workflow-chatbot.png" alt="AI Ticket Data Assistant workflow" width="100%">
+
+<sub>The chatbot uses the Grok model, short-term memory, the master ticket database as a tool, and chat-history logging.</sub>
+
+</div>
+
 A separate chatbot workflow allows users to ask questions about processed ticket data. The assistant can use the master ticket database as a tool and is designed to answer questions about:
 
 - ticket categories
@@ -199,6 +215,14 @@ A separate chatbot workflow allows users to ask questions about processed ticket
 The workflow also includes short-term conversational memory and chat-history logging.
 
 ### Scheduled Anomaly Monitoring
+
+<div align="center">
+
+<img src="assets/workflow-monitoring.png" alt="Scheduled ticket anomaly monitoring workflow" width="100%">
+
+<sub>Scheduled monitoring reads processed tickets, analyzes ticket volumes, evaluates anomaly thresholds, and generates an alert when review is needed.</sub>
+
+</div>
 
 A scheduled monitoring branch reads the ticket database, calculates ticket-volume indicators, and checks for unusual concentrations of:
 
