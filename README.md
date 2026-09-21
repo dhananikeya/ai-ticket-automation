@@ -1,67 +1,69 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0B1F3A&height=190&section=header&text=AI%20Ticket%20Automation&fontSize=38&fontColor=FFFFFF&animation=fadeIn&fontAlignY=36&desc=Intelligent%20classification%20%7C%20routing%20%7C%20monitoring%20%7C%20analysis&descSize=16&descAlignY=57&descColor=FFFFFF"/>
+# AI Ticket Automation
 
-![n8n](https://img.shields.io/badge/n8n-0B1F3A?style=for-the-badge&logo=n8n&logoColor=white)
-![LLM](https://img.shields.io/badge/LLM%20Automation-0B1F3A?style=for-the-badge&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-0B1F3A?style=for-the-badge&logo=javascript&logoColor=white)
-![Google Sheets](https://img.shields.io/badge/Google%20Sheets-0B1F3A?style=for-the-badge&logo=googlesheets&logoColor=white)
-![Google Drive](https://img.shields.io/badge/Google%20Drive-0B1F3A?style=for-the-badge&logo=googledrive&logoColor=white)
+**End-to-End Intelligent IT Service Ticket Processing, Routing, Monitoring, and Analysis**
 
-**An end-to-end AI workflow for cleaning, classifying, prioritizing, routing, storing, monitoring, and querying IT service tickets.**
+![n8n](https://img.shields.io/badge/n8n-0B1F3A?style=flat-square&logo=n8n&logoColor=white)
+![LLM](https://img.shields.io/badge/LLM%20Automation-0B1F3A?style=flat-square)
+![JavaScript](https://img.shields.io/badge/JavaScript-0B1F3A?style=flat-square&logo=javascript&logoColor=white)
+![Google Sheets](https://img.shields.io/badge/Google%20Sheets-0B1F3A?style=flat-square&logo=googlesheets&logoColor=white)
+![Google Drive](https://img.shields.io/badge/Google%20Drive-0B1F3A?style=flat-square&logo=googledrive&logoColor=white)
 
 </div>
 
 ---
 
-## Overview
+## Executive Summary
 
-This project is an AI-powered IT service-ticket automation system built in **n8n**. It takes an uploaded Excel ticket dataset, cleans and validates the data, uses an LLM to classify each ticket, applies priority logic, routes tickets to the appropriate support team, stores processed records in Google Sheets, and supports automated monitoring and conversational analysis.
+This project is an AI-powered IT service-ticket automation system built in **n8n**. The workflow accepts an uploaded Excel ticket dataset, cleans and validates the data, uses an LLM to classify each ticket, applies rule-based priority logic, routes tickets to the appropriate support team, stores processed records in Google Sheets, and supports automated monitoring and conversational analysis.
 
-The project was designed to reduce repetitive ticket triage work while keeping the workflow understandable, auditable, and easy to extend.
-
----
-
-## Problem
-
-Manual service-ticket triage can require teams to repeatedly:
-
-- clean inconsistent ticket data
-- identify missing or duplicate records
-- determine the correct incident category
-- assign priorities
-- route tickets to the correct team
-- maintain a centralized ticket database
-- review ticket activity for unusual patterns
-- answer questions about processed ticket data
-
-This workflow combines those steps into one automated system.
+The system was designed to reduce repetitive ticket-triage work while keeping the workflow structured, auditable, and extensible.
 
 ---
 
-## Solution
+## Business Problem
 
-The workflow contains three connected capabilities:
+Manual IT service-ticket triage can require teams to repeatedly perform several time-consuming tasks:
+
+- Clean inconsistent or incomplete ticket data
+- Identify missing or duplicate records
+- Determine the correct incident category
+- Assign ticket priority
+- Route tickets to the appropriate support team
+- Maintain a centralized ticket database
+- Monitor ticket activity for unusual patterns
+- Answer questions about processed ticket data
+
+This project consolidates those activities into a single automated workflow.
+
+---
+
+## Solution Overview
+
+The solution contains three primary capabilities:
 
 ### 1. Ticket Processing Pipeline
+
 Processes uploaded Excel ticket data from ingestion through final storage.
 
 ### 2. AI Ticket Data Assistant
-Provides a conversational interface for asking questions about processed ticket data.
+
+Provides a conversational interface for querying processed ticket data.
 
 ### 3. Scheduled Ticket Monitor
+
 Analyzes ticket volumes on a schedule and flags unusual activity based on defined thresholds.
 
 ---
 
-
-## Workflow Preview
+## Workflow Overview
 
 <div align="center">
 
 <img src="assets/workflow-full.png" alt="Full n8n AI ticket automation workflow" width="100%">
 
-<sub>Full n8n workflow showing ticket ingestion, data cleaning, LLM classification, priority logic, department routing, chatbot analysis, scheduled monitoring, and final storage.</sub>
+<sub>Full workflow showing ticket ingestion, data cleaning, LLM classification, priority logic, department routing, chatbot analysis, scheduled monitoring, and final storage.</sub>
 
 </div>
 
@@ -102,22 +104,22 @@ flowchart LR
 
 ---
 
-## Core Features
+## Functional Components
 
-### Data Cleaning & Validation
+### Data Cleaning and Validation
 
 The JavaScript preprocessing stage normalizes inconsistent values before tickets are sent to the AI classifier. It handles:
 
-- whitespace and missing-value cleanup
-- boolean normalization
-- numeric normalization
-- label formatting
-- multiple date formats
-- common ticket-description typos
-- technical-name formatting such as VPN, Wi-Fi, CRM, MFA, and Salesforce
-- missing ticket IDs
-- missing descriptions
-- duplicate ticket IDs
+- Whitespace and missing-value cleanup
+- Boolean normalization
+- Numeric normalization
+- Label formatting
+- Multiple date formats
+- Common ticket-description typos
+- Technical-name formatting such as VPN, Wi-Fi, CRM, MFA, and Salesforce
+- Missing ticket IDs
+- Missing descriptions
+- Duplicate ticket IDs
 
 Only valid tickets continue through the main AI processing pipeline.
 
@@ -125,21 +127,21 @@ Only valid tickets continue through the main AI processing pipeline.
 
 The workflow uses an **xAI Grok model** through n8n's LLM tooling to classify tickets into one of five categories:
 
-| Category | Example issues |
+| Category | Typical Issues |
 |---|---|
 | Account Access | Passwords, login failures, account lockouts, permissions |
 | Network Issue | VPN, Wi-Fi, internet connectivity, outages |
 | Application Support | Software errors, CRM issues, application failures |
-| Hardware Support | Laptops, monitors, docks, peripherals |
+| Hardware Support | Laptops, monitors, docking stations, peripherals |
 | Security Issue | Phishing, malware, suspicious activity, compromise |
 
-The structured AI response includes the ticket ID, category, summary, confidence score, human-review signal, and rationale.
+The structured AI response includes the ticket ID, category, summary, confidence score, human-review indicator, and rationale.
 
-### Priority Engine
+### Priority Logic
 
-After classification, the workflow applies rule-based priority logic to identify higher-impact tickets. Security issues receive critical treatment, while outage and availability-related language is used to distinguish additional priority levels.
+After classification, the workflow applies deterministic priority rules. Security issues receive critical treatment, while outage and availability-related language is used to distinguish additional priority levels.
 
-### Intelligent Team Routing
+### Department Routing and Team Assignment
 
 Tickets are automatically routed according to their classified issue type:
 
@@ -155,13 +157,13 @@ Tickets are automatically routed according to their classified issue type:
 
 <img src="assets/workflow-routing.png" alt="Department routing and team assignment workflow" width="100%">
 
-<sub>Close-up of the routing stage, showing priority handling, hardware detection, department routing, team assignment, merge, and final storage.</sub>
+<sub>Routing stage showing priority handling, hardware detection, department routing, team assignment, merge, and final storage.</sub>
 
 </div>
 
 ### Centralized Ticket Storage
 
-Processed tickets are merged into a consistent output structure and written to a Google Sheets master ticket database with fields such as:
+Processed tickets are merged into a consistent output structure and written to a Google Sheets master ticket database containing fields such as:
 
 - Ticket ID
 - Description
@@ -176,8 +178,51 @@ Processed tickets are merged into a consistent output structure and written to a
 - Processed Date
 - Status
 
+### AI Ticket Data Assistant
 
-### Sample Processed Output
+<div align="center">
+
+<img src="assets/workflow-chatbot.png" alt="AI Ticket Data Assistant workflow" width="100%">
+
+<sub>The assistant uses the Grok model, short-term memory, the master ticket database as a tool, and chat-history logging.</sub>
+
+</div>
+
+The chatbot can answer questions about:
+
+- Ticket categories
+- Priorities
+- Assigned teams
+- Ticket counts
+- Common incident types
+- Recurring problems
+- Human-review tickets
+- Dataset trends
+
+The workflow also includes short-term conversational memory and chat-history logging.
+
+### Scheduled Anomaly Monitoring
+
+<div align="center">
+
+<img src="assets/workflow-monitoring.png" alt="Scheduled ticket anomaly monitoring workflow" width="100%">
+
+<sub>Scheduled monitoring reads processed tickets, analyzes ticket volumes, evaluates anomaly thresholds, and generates an alert when review is required.</sub>
+
+</div>
+
+The monitoring branch evaluates concentrations of:
+
+- Security incidents
+- Critical tickets
+- Human-review tickets
+- Network incidents
+
+If defined thresholds are exceeded, the workflow generates an anomaly alert.
+
+---
+
+## Sample Results
 
 A successful test run produced correctly structured records across all five routing categories:
 
@@ -189,53 +234,11 @@ A successful test run produced correctly structured records across all five rout
 | INC0009728 | Hardware Support | Low | Desktop Support Team | 0.95 |
 | INC0007176 | Security Issue | Critical | Security Team | 0.93 |
 
-This test demonstrates the full classification-to-routing path, including the dedicated desktop-support path for hardware incidents and critical treatment for security incidents.
-
-### AI Ticket Data Assistant
-
-<div align="center">
-
-<img src="assets/workflow-chatbot.png" alt="AI Ticket Data Assistant workflow" width="100%">
-
-<sub>The chatbot uses the Grok model, short-term memory, the master ticket database as a tool, and chat-history logging.</sub>
-
-</div>
-
-A separate chatbot workflow allows users to ask questions about processed ticket data. The assistant can use the master ticket database as a tool and is designed to answer questions about:
-
-- ticket categories
-- priorities
-- assigned teams
-- ticket counts
-- common incident types
-- recurring problems
-- human-review tickets
-- dataset trends
-
-The workflow also includes short-term conversational memory and chat-history logging.
-
-### Scheduled Anomaly Monitoring
-
-<div align="center">
-
-<img src="assets/workflow-monitoring.png" alt="Scheduled ticket anomaly monitoring workflow" width="100%">
-
-<sub>Scheduled monitoring reads processed tickets, analyzes ticket volumes, evaluates anomaly thresholds, and generates an alert when review is needed.</sub>
-
-</div>
-
-A scheduled monitoring branch reads the ticket database, calculates ticket-volume indicators, and checks for unusual concentrations of:
-
-- security incidents
-- critical tickets
-- human-review tickets
-- network incidents
-
-If defined thresholds are exceeded, the workflow generates an anomaly alert for review.
+This test demonstrates the complete classification-to-routing path, including the dedicated desktop-support path for hardware incidents and critical treatment for security incidents.
 
 ---
 
-## Workflow Breakdown
+## Processing Sequence
 
 ```text
 Excel Upload
@@ -278,49 +281,27 @@ Google Sheets Master Database
 
 ---
 
-## Example Processing Flow
-
-A ticket such as:
-
-```text
-Ticket ID: INC-1042
-Description: User cannot connect to company VPN.
-Impact: 2 - Medium
-Urgency: 2 - Medium
-```
-
-can move through the workflow as:
-
-```text
-Cleaned & validated
-        ↓
-Category: Network Issue
-        ↓
-Priority evaluated
-        ↓
-Assigned Team: Network Team
-        ↓
-Saved to Master Ticket Database
-```
-
----
-
 ## Design Principles
 
-The workflow was built around several practical ideas:
-
-- **AI where judgment helps:** LLM classification is used for interpreting ticket descriptions.
-- **Rules where consistency matters:** priority and routing logic remain deterministic.
-- **Structured outputs:** AI responses follow a defined schema instead of free-form text.
-- **Human oversight:** the classification schema includes confidence and review indicators for ambiguous or sensitive tickets.
-- **Centralized data:** processed records are stored in one master location.
-- **Automation beyond ingestion:** monitoring and conversational analysis extend the system after ticket processing.
+- **AI for interpretation:** LLM classification is used where natural-language judgment is useful.
+- **Rules for consistency:** Priority and routing logic remain deterministic.
+- **Structured outputs:** AI responses follow a defined schema rather than free-form text.
+- **Human oversight:** Confidence and review indicators support ambiguous or sensitive cases.
+- **Centralized data:** Processed records are maintained in a single master location.
+- **Post-processing automation:** Monitoring and conversational analysis extend the system beyond initial ticket ingestion.
 
 ---
 
-## Repository Safety
+## Security and Public Repository Considerations
 
-The public portfolio version of this project should **not** contain live API keys, OAuth tokens, webhook identifiers, private spreadsheet IDs, private Drive folder IDs, or production ticket data.
+The public portfolio version of this project should not contain:
+
+- Live API keys
+- OAuth tokens
+- Webhook identifiers
+- Private spreadsheet IDs
+- Private Google Drive folder IDs
+- Production ticket data
 
 Anyone importing a public workflow export should connect their own credentials and replace placeholder resource IDs before testing.
 
@@ -328,30 +309,26 @@ Anyone importing a public workflow export should connect their own credentials a
 
 ## Future Enhancements
 
-Potential next steps include:
+Potential improvements include:
 
-- email or Slack alerts for anomalies and critical incidents
-- a dedicated human-review queue
-- historical trend dashboards
+- Email or Slack alerts for anomalies and critical incidents
+- A dedicated human-review queue
+- Historical trend dashboards
 - SLA-risk prediction
-- richer confidence-based routing rules
-- database-backed storage for higher ticket volumes
-- role-based access controls
-- model evaluation against a labeled ticket test set
-- production observability and error handling
+- Expanded confidence-based routing rules
+- Database-backed storage for higher ticket volumes
+- Role-based access controls
+- Model evaluation against a labeled ticket test set
+- Production observability and error handling
 
 ---
 
-## About the Project
+## Project Context
 
-This project was created as an Information Systems automation project focused on applying **AI, workflow automation, data processing, and business-process design** to a realistic service-management use case.
+This project was created as an Information Systems automation project focused on applying **AI, workflow automation, data processing, and business-process design** to a realistic IT service-management use case.
 
 <div align="center">
 
-### Connect
-
-<a href="https://www.linkedin.com/in/keyadhanani">
-<img src="https://img.shields.io/badge/LinkedIn-Keya%20Dhanani-0B1F3A?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-</a>
+[LinkedIn](https://www.linkedin.com/in/keyadhanani)
 
 </div>
