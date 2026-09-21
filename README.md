@@ -54,6 +54,19 @@ Analyzes ticket volumes on a schedule and flags unusual activity based on define
 
 ---
 
+
+## Workflow Preview
+
+<div align="center">
+
+<img src="assets/workflow-overview.jpg" alt="Full n8n AI ticket automation workflow" width="100%">
+
+<sub>Full n8n workflow showing ticket ingestion, data cleaning, LLM classification, priority logic, department routing, chatbot analysis, scheduled monitoring, and final storage.</sub>
+
+</div>
+
+---
+
 ## System Architecture
 
 ```mermaid
@@ -154,6 +167,21 @@ Processed tickets are merged into a consistent output structure and written to a
 - Summary
 - Processed Date
 - Status
+
+
+### Sample Processed Output
+
+A successful test run produced correctly structured records across all five routing categories:
+
+| Ticket | Category | Priority | Assigned Team | AI Confidence |
+|---|---|---:|---|---:|
+| INC0019330 | Account Access | Low | IAM Team | 0.93 |
+| INC0007913 | Network Issue | Low | Network Team | 0.74 |
+| INC0024223 | Application Support | Medium | Application Support Team | 0.85 |
+| INC0009728 | Hardware Support | Low | Desktop Support Team | 0.95 |
+| INC0007176 | Security Issue | Critical | Security Team | 0.93 |
+
+This test demonstrates the full classification-to-routing path, including the dedicated desktop-support path for hardware incidents and critical treatment for security incidents.
 
 ### AI Ticket Data Assistant
 
